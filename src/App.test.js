@@ -1,9 +1,38 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { shallow } from "enzyme";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
+import App from "./App";
+import thunk from "redux-thunk";
+import { shallowToJson } from "enzyme-to-json";
+import configureStore from "redux-mock-store";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const mockStore = configureStore([thunk]);
+
+const initialState = {
+  data: {
+    trips: []
+  }
+};
+
+const baseProps = {
+  data: {},
+  fetchTripRequest: () => null
+};
+
+describe("renders App component", () => {
+  let store, component;
+  beforeEach(() => {
+    store = mockStore(initialState);
+    store.dispatch = jest.fn();
+    component = renderer.create(
+      <Provider store={store}>
+        <App {...baseProps} />
+      </Provider>
+    );
+  });
+
+  it("should render with given state from Redux store", () => {
+    expect(shallowToJson(component)).toMatchSnapshot();
+  });
 });
