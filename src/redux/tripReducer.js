@@ -1,32 +1,33 @@
-const initialState = {
+export const initialState = {
     fetchTripRequest: true,
     fetchTripSuccess: false,
     fetchTripFail: false,
     data: {},
-    error: null,
-}
+    error: null
+};
 
 export default function tripReducder(state = initialState, action) {
     switch (action.type) {
         case "FETCH_TRIP_REQUEST":
             return {
                 ...state,
-                fetchTripRequest: true,
-            }
+                fetchTripRequest: true
+            };
         case "FETCH_TRIP_SUCCESS":
             return {
                 ...state,
                 fetchTripRequest: false,
                 fetchTripSuccess: false,
-                data: action.res,
-            }
+                data: action.res
+            };
         case "FETCH_TRIP_FAIL":
             return {
                 ...state,
+                fetchTripRequest: false,
                 fetchTripFail: true,
-                error: action.res,
-            }
+                error: action.res
+            };
         default:
-            return state
+            return state;
     }
 }
