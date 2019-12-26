@@ -1,12 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import App from "./App";
 import thunk from "redux-thunk";
 import { shallowToJson } from "enzyme-to-json";
 import configureStore from "redux-mock-store";
-import { tripAction } from './redux/tripAction'
 
 const mockStore = configureStore([thunk]);
 
@@ -39,5 +37,5 @@ describe("renders App component", () => {
 
   it("should dispatch an action on componentDidMount", () => {
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-  })
+  });
 });
