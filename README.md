@@ -22,3 +22,5 @@ You will also see any lint errors in the console.
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
+
+To update api endpoint url, you can change it in .env file with variable is `REACT_APP_API_URL`
